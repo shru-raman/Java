@@ -1,0 +1,32 @@
+public class Main
+{
+    String name;
+    public static int count = 1;
+    public Main(String name){
+      this.name = name;
+      count++;
+    }
+
+  protected void finalize(){
+    count--;
+  }
+    
+    public static void main(String[] args)
+    {
+        System.out.println("Main : "+Thread.currentThread());
+        Main t1 = new Main("t1");
+        
+      System.out.println(Main.count);
+      {
+        Main t2 = new Main("t2");
+        Main t3 = new Main("t3");
+        t2 = null;
+        t3 = null;
+       System.gc(); // to ensure count reduces when object removed
+       System.runFinalization(); // finalize may not get executed immediatly, so call this
+      }
+      System.out.println("hmm");
+      for(int i = 0;i<10;i++)
+        System.out.println(Main.count);
+    }
+}
