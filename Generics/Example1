@@ -1,0 +1,29 @@
+import java.util.*;
+class Main {  
+  public static void main(String args[]) { 
+    MyGenericList list = new MyGenericList();
+    list.add(1);
+    list.add(2);
+    System.out.println(list.getFirst());
+    System.out.println(list.getLast());
+    MyGenericList strList = new MyGenericList();
+    strList.add("Hello");
+    strList.add("Shruthi");
+    System.out.println(strList.getFirst());
+    System.out.println(strList.getLast());
+
+  } 
+}
+
+class MyGenericList<T> {
+  List<T> list = new ArrayList<>();
+  public void add(T a){
+    list.add(a);
+  }
+  public T getFirst(){
+    return list.get(0);
+  }
+  public T getLast(){
+    return list.get(list.size()-1);
+  }
+}
