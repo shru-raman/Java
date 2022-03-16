@@ -1,0 +1,28 @@
+import java.util.*;
+
+class Main { 
+ 
+  public static void main(String args[]) { 
+    System.out.println("Hello, world!");
+
+    MyGenericList<Integer> upperBoundList = new MyGenericList<>();
+    upperBoundList.add(List.of(1,2.1,3));
+
+    MyGenericList<Integer> lowerBoundList = new MyGenericList<>();
+    lowerBoundList.add(List.of(1,2,3));
+  } 
+}
+
+class MyGenericList<T> {
+  List<T> list = new ArrayList<>();
+  //Upperbound -- > any subclass that extends Number
+  public void add(List<? extends Number> list){
+    for(Number num : list){
+      System.out.println(num.doubleValue());
+    }
+  }
+  //lowerbound  -> any supertype of Integer class
+  public void dis (List<? super Integer> list){
+    list.add(Integer.valueOf(1));
+  }
+}
