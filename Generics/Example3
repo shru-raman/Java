@@ -1,0 +1,39 @@
+import java.util.*;
+class Main {  
+  public static void main(String args[]) { 
+    System.out.println("Hello, world!");
+    MyGenericList<Integer> list = new MyGenericList<>();
+    list.add(1);
+    list.add(2);
+    list.add(2);
+    Integer val = list.doubleValue(Integer.valueOf(2));
+    
+    System.out.println(list.getFirst());
+    System.out.println(list.getLast());
+    System.out.println("method generic : "+val);
+    MyGenericList<Long> strList = new MyGenericList<>();
+    strList.add(1l);
+    strList.add(2l);
+    System.out.println(strList.getFirst());
+    System.out.println(strList.getLast());
+    //Long val1 = strList.doubleValue(1l); //does not work as long doesnt extend Integer, but it extends Number
+    //System.out.println("method generic : "+val1);  
+
+  } 
+}
+
+class MyGenericList<T> {
+  List<T> list = new ArrayList<>();
+  public void add(T a){
+    list.add(a);
+  }
+  public T getFirst(){
+    return list.get(0);
+  }
+  public T getLast(){
+    return list.get(list.size()-1);
+  }
+  public <T extends Integer> T doubleValue(T a){
+    return a;
+  }
+}
