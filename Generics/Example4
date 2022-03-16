@@ -1,0 +1,21 @@
+import java.util.*;
+
+class Main extends MyGenericList<String> { 
+  @Override
+  public void display(String param){
+    System.out.println("DISPLAYING "+param);
+  }
+  public static void main(String args[]) { 
+    System.out.println("Hello, world!"); 
+    Main main = new Main();
+    main.display("Shruthi");
+  } 
+}
+
+abstract class MyGenericList<T> {
+  List<T> list = new ArrayList<>();
+  public abstract void display(T param);
+  public void add(T param){
+    list.add(param);
+    }
+}
