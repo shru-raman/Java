@@ -1,0 +1,13 @@
+//Java 8 has new functional Interface called Supplier that doesnt take any input and returns only a result
+import java.util.*;
+import java.util.function.Supplier;
+
+import java.util.*;
+
+class Main {
+  public static void main(String args[]) { 
+    System.out.println("Hello, world!"); 
+    Supplier<Integer> sup = () -> Integer.MAX_VALUE;
+    System.out.println(sup.get());    
+  }
+}
