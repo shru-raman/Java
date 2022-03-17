@@ -1,0 +1,29 @@
+@FunctionalInterface
+interface SAM {
+  public void display();
+  //public void wrong(); cant have more than one method
+  default void getFeatures(){
+    System.out.println("This is default method in functional interface");
+  }
+}
+//How we normall do
+class Shape implements SAM{
+  public void display(){
+    System.out.println("This is normal class implementing an interface");
+    getFeatures();
+  }
+}
+class Main {  
+  public static void main(String args[]) {
+    System.out.println("Hello, world!");
+    //Java 8 functional interface implemented using lambda expression instead of anonymous class
+    SAM sam = () -> {
+      System.out.println("This is implementing functional interface using lambda expression");
+    };
+    sam.display();
+    sam.getFeatures();
+
+    Shape shape = new Shape();
+    shape.display();
+  } 
+}
