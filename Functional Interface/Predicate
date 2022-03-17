@@ -1,0 +1,34 @@
+//Java 8 has new functional Interface called Predicate that has one method "test" that takes one condition as arguement and returns boolean val
+import java.util.function.Predicate;
+import java.util.*;
+class Main {  
+  public static void main(String args[]) { 
+    System.out.println("Hello, world!"); 
+     //How we will implement without lambda
+    /*
+     Predicate<String> p = new Predicate<>(){
+      public boolean test(String val){
+        return val==null;
+      }
+    };
+    */
+
+    
+    //How to do with lambda, no need to give return statement
+    //Example 1
+    Predicate<String> p = (a) -> a==null;
+    boolean result = p.test(null);
+    System.out.println(result);
+
+    
+    //Example 2
+    //check if a string starts with S
+    List<String> words = new ArrayList<>();
+    words.add("Shruthi");
+    words.add("Hello");
+    Predicate<String> p1 = (str) -> str.charAt(0)=='S';
+    for(String word : words){
+      System.out.println(word+"-"+p1.test(word));
+    }
+  } 
+}
