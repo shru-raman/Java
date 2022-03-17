@@ -1,0 +1,36 @@
+//Java 8 has new functional Interface called Consumer that has one method "accept" that takes two inputs as arguement and returns nothing
+import java.util.function.Consumer;
+import java.util.function.BiConsumer;
+
+import java.util.*;
+
+class Main {
+  public static void main(String args[]) { 
+    System.out.println("Hello, world!"); 
+  
+    List<Integer> numList = new ArrayList<>();
+    numList.add(1);
+    numList.add(2);
+
+    Consumer<List<Integer>> con1 = (nums) -> {
+      for(int num : nums){
+        System.out.println(num);
+      }
+    };
+
+    BiConsumer<List<Integer>, Integer> con2 = (nums, multiplier)-> {
+      for(int i = 0;i<nums.size();i++){
+        nums.set(i, nums.get(i)*multiplier);
+      }
+    };
+    //In case of NPE in Consumer/ Biconsumer's andThen(), first consumer will also not get exexuted, for Other exceptions, first consumer will happen
+   
+    con2.accept(numList,3);
+    con1.accept(numList);
+    try{
+          con1.andThen(null).accept(numList);
+    } catch(Exception e){
+      System.out.println("NPE");
+    }
+  }
+}
