@@ -1,0 +1,25 @@
+//Functional interface being passed as arguement to method
+
+import java.util.*;
+import java.util.function.Supplier;
+
+import java.util.*;
+
+interface Mathematic {
+  public int operation(int x, int y);
+}
+class Main {
+  public static void main(String args[]) { 
+    System.out.println("Hello, world!"); 
+    Mathematic add = (x,y) -> x+y ;
+    Mathematic sub = (x,y) -> x-y;
+
+    int addResult = evaluate(5,3,add);
+    int subResult = evaluate(5,3,sub);
+    System.out.println(addResult+", "+subResult);
+  }
+
+  public static int evaluate(int x, int y, Mathematic m){
+    return m.operation(x,y);
+  }
+}
