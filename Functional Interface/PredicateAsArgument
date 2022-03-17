@@ -1,0 +1,33 @@
+//Java 8 has new functional Interface called Predicate that has one method "test" that takes one condition as arguement and returns boolean val
+import java.util.function.Predicate;
+import java.util.*;
+
+class TestPredicate {
+  public boolean evaluate(String word, Predicate<String> p){
+    return p.test(word);
+  }
+}
+
+class Main {  
+  public static void main(String args[]) { 
+    System.out.println("Hello, world!"); 
+  
+    List<String> words = new ArrayList<>();
+    words.add("Shruthi");
+    words.add("Hello");
+
+    Predicate<String> p1 = (word) -> word.length()>5;
+    Predicate<String> p2 = (word) -> word.equals("Hello");
+   TestPredicate obj = new TestPredicate();
+    //Chaining of predicates
+    for(String word : words){
+      System.out.println("For word - "+ word);
+      boolean res = obj.evaluate(word, p1);
+      System.out.println(res);
+      boolean res1 = obj.evaluate(word, p1.and(p2));
+      System.out.println(res1);
+    }
+    
+   
+  } 
+}
