@@ -1,0 +1,28 @@
+class Main {  
+  public static void main(String args[]) { 
+    System.out.println("Hello, world!"); 
+    Outer outObj = new Outer();
+    Outer.Inner inObj = outObj.new Inner();
+    Outer.StaticNested stat = new Outer.StaticNested();
+    inObj.helper();
+    stat.helper(outObj);
+  } 
+}
+
+class Outer {
+  private int id = 0;
+  private static int count = 0;
+  class Inner {
+    void helper(){
+      System.out.println("Accessing outer id - "+id);
+      System.out.println("Accessing outer count - "+count);
+    }
+  }
+  static class StaticNested {
+    void helper(Outer outObj){
+      System.out.println("From static, Accessing outer id - "+outObj.id);
+      System.out.println("From static, Accessing outer count - "+count);
+
+    }
+  }
+}
