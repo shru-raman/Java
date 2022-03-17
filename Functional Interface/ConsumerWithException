@@ -1,0 +1,31 @@
+//Java 8 has new functional Interface called Consumer that has one method "accept" that takes one condition as arguement and returns nothing
+import java.util.function.Consumer;
+import java.util.*;
+
+class Main {
+  public static void main(String args[]) { 
+    System.out.println("Hello, world!"); 
+  
+    List<Integer> numList = new ArrayList<>();
+    numList.add(1);
+    numList.add(2);
+
+    Consumer<List<Integer>> con1 = (nums) -> {
+      for(int num : nums){
+        System.out.println(num);
+      }
+    };
+
+    Consumer<List<Integer>> con2 = (nums)-> {
+      for(int i = 0;i<=nums.size();i++){
+        nums.set(i, nums.get(i)*2);
+      }
+    };
+    //displays the output of con1 and then throws the exception statement of con2
+    try{
+      con1.andThen(con2).accept(numList);
+    } catch(Exception e){
+      System.out.println("Exception in 2nd consumer");
+    }
+  }
+}
