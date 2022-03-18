@@ -1,0 +1,83 @@
+//Builder pattern, Builder class should be a static nested class
+
+import java.util.*;
+import java.util.function.Supplier;
+
+import java.util.*;
+
+class Mobile {
+  private boolean tsa;
+  private boolean enabled5G;
+  private int ram;
+  private String brand;
+  private String device;
+
+
+  private Mobile(MobileBuilder mb){
+    this.tsa = mb.tsa;
+    this.enabled5G = mb.enabled5G;
+    this.ram = mb.ram;
+    this.brand = mb.brand;
+    this.device = mb.device;
+  }
+
+  public boolean isTsa(){
+    return tsa;
+  }
+  public boolean isEna(){
+    return enabled5G;
+  }
+  public int getRam(){
+    return ram;
+  }
+  public String getBrand(){
+    return brand;
+  }
+   public String getDevice(){
+    return device;
+  }
+
+  public void print(){
+    System.out.println(tsa);
+    System.out.println(enabled5G);
+    System.out.println( ram);
+    System.out.println( brand);
+    System.out.println( device);
+  }
+
+  //static nested class
+  static class MobileBuilder {
+  private boolean tsa;
+  private boolean enabled5G;
+  private int ram;
+  private String brand;
+  private String device;
+
+  public MobileBuilder(String brand, String device){
+    this.brand = brand;
+    this.device = device;
+  }
+  public MobileBuilder setTsa(boolean tsa){
+    this.tsa = tsa;
+    return this;
+  }
+  public MobileBuilder setEnabled5G(boolean enabled5G){
+    this.enabled5G = enabled5G;
+    return this;
+  }
+  public MobileBuilder setRam(int ram){
+    this.ram = ram;
+    return this;
+  }
+  public Mobile build(){
+    return new Mobile(this);
+  }
+} 
+}
+
+class Main {
+  public static void main(String args[]) { 
+    Mobile m = new Mobile.MobileBuilder("a","b").setTsa(true).setRam(16).build();
+    m.print();
+  }
+}
