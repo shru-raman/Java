@@ -1,0 +1,9 @@
+import java.util.*;
+class Main {
+  public static void main(String args[]) {
+    System.out.println("Hello, world!"); 
+    Optional<String> op = Optional.of(null);
+    //Gives NPE in run time error
+    System.out.println("Optional : "+op);
+  }
+}
