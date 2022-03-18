@@ -1,0 +1,47 @@
+//Factory pattern, getInstance() should be a static method
+
+import java.util.*;
+import java.util.function.Supplier;
+
+import java.util.*;
+interface os {
+  public void spec();
+}
+
+class Android implements os {
+  public void spec(){
+    System.out.println("Android OS");
+  }
+}
+class Windows implements os{
+  public void spec(){
+    System.out.println("Windows OS");
+  }
+}
+class Apple implements os{
+  public void spec(){
+    System.out.println("Apple iOS");
+  }
+}
+
+class MobileFactory {
+  public static os getInstance(String osType) {
+    if(osType.equals("Open")){
+      return new Android();
+    } else if (osType.equals("Closed")){
+      return new Apple();
+    } else {
+      return new Windows();
+    }
+  }
+}
+
+class Main {
+  public static void main(String args[]) {
+    os os = MobileFactory.getInstance("Open");
+    os.spec();
+
+    os ios = MobileFactory.getInstance("Closed");
+    ios.spec();
+  }
+}
