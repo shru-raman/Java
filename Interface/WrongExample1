@@ -1,0 +1,19 @@
+class Main {
+  public static void main(String args[]) {
+    System.out.println("Hello, world!"); 
+    Parent p = new Child();
+    p.show();
+  } 
+}
+
+class Parent {
+  public void show() {
+    System.out.println("Parent");
+  }
+}
+
+class Child extends Parent {
+  protected void show() {
+    System.out.println("Child");
+  }
+}
