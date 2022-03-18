@@ -1,0 +1,22 @@
+class Main {
+  public static void main(String args[]) {
+    System.out.println("Hello, world!"); 
+    StringBuffer sb = new StringBuffer("Hello");
+    changeStringBuffer(sb);
+    System.out.println(sb);
+    String s = "Hello";
+    changeString(s);
+    System.out.println(s);
+
+  } 
+
+  static void changeString(String s){
+    s = null;
+  }
+
+  static void changeStringBuffer(final StringBuffer sb){
+    sb.append("World");
+  }
+  
+}
+
