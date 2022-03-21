@@ -1,0 +1,21 @@
+import java.util.concurrent.*;
+import java.time.*;
+import java.util.*;
+
+class Main {  
+  public static void main(String args[]) throws Exception{ 
+    System.out.println("Hello, world!"); 
+    BlockingQueue<Integer> bq = new LinkedBlockingQueue<>(2);
+    bq.add(1);
+    bq.add(2);
+    //bq.add(3); // exception as queue full
+    boolean canInsert = bq.offer(3); // no exception but doesnt get added to bq
+    System.out.println(canInsert); // returns false
+    bq.put(4); // blocks till queue s availabe and it can put val in queue
+    System.out.println("Doesnt exec - Blocked bcz put is a block waiting for queue to be available");
+    bq.remove(1);
+    for(int i : bq){
+      System.out.println(i);
+    }
+  } 
+}
