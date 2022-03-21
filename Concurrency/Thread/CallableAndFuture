@@ -1,0 +1,29 @@
+import java.util.concurrent.*;
+import java.time.*;
+
+class Main {  
+  public static void main(String args[]) throws Exception{ 
+    System.out.println("Hello, world!"); 
+    ExecutorService cservice = Executors.newFixedThreadPool(1);
+
+    Future<String> f = cservice.submit(new Task2());
+    System.out.println("Operations before blocking method");
+    System.out.println("Future value is : "+f.get());
+    System.out.println("Operation after blocking methid");
+    cservice.shutdown();
+  } 
+}
+
+class Task1 extends Thread {
+  public void run(){
+    System.out.println("Task1 is running at "+LocalTime.now());
+  }
+}
+
+class Task2 implements Callable<String> {
+  public String call() throws Exception {
+    System.out.println("Thread sleeping for 1000 and then returning future value");
+    Thread.sleep(1000);
+    return "Task2 is being returned to future";
+  }
+}
