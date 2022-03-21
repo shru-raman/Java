@@ -1,0 +1,29 @@
+import java.util.concurrent.*;
+import java.time.*;
+import java.util.*;
+
+class Main {  
+  public static void main(String args[]) throws Exception{ 
+    System.out.println("Hello, world!"); 
+    int count = 10;
+    ExecutorService cservice = Executors.newFixedThreadPool(5);
+
+    List<Future<String>> list = new ArrayList<>();
+    while(count-- > 0) {
+      Future<String> f = cservice.submit(()-> {
+      Thread.sleep(1000);
+      return "Task2 is being returned to future";
+      });
+      list.add(f);
+    }
+    
+    System.out.println("Operations before blocking method running independent of executor thread");
+    
+    for(Future f : list) {
+      System.out.println("Future value is : "+f.get());
+    }
+    
+    System.out.println("Operation after blocking method");
+    cservice.shutdown();
+  } 
+}
