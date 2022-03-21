@@ -1,0 +1,22 @@
+class Main {  
+  public static void main(String args[]) { 
+    System.out.println("Hello, world!"); 
+    Task1 t1 = new Task1();
+    t1.start();
+
+    Thread t2 = new Thread(new Task2());
+    t2.start();
+  } 
+}
+
+class Task1 extends Thread {
+  public void run(){
+    System.out.println("Task1 is running");
+  }
+}
+
+class Task2 implements Runnable {
+  public void run(){
+    System.out.println("Task2 is running");
+  }
+}
