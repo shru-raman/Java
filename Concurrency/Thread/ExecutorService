@@ -1,0 +1,27 @@
+import java.util.concurrent.*;
+import java.time.*;
+
+class Main {  
+  public static void main(String args[]) throws InterruptedException{ 
+    System.out.println("Hello, world!"); 
+    int count = 10;
+
+    ExecutorService service = Executors.newFixedThreadPool(5);
+
+    while(count-- > 0){
+      service.execute(new Task1());
+      Thread.sleep(100);
+    }
+    service.shutdown();
+    service.awaitTermination(1,TimeUnit.SECONDS);
+    System.out.println(service.isTerminated());
+    service.execute(new Task1()); //should throw exception after shutdown is initiated
+
+  } 
+}
+
+class Task1 extends Thread {
+  public void run(){
+    System.out.println("Task1 is running at "+LocalTime.now());
+  }
+}
