@@ -1,0 +1,110 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.zone.ZoneRulesProvider;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
+        //forEach
+
+        List<Integer> list = new ArrayList<>();
+        IntStream.of(1000).forEach(x -> list.add(x));
+        System.out.println(list);
+
+        Random rand = new Random();
+        rand.ints(5).forEach(System.out::println);
+
+        int[] arr = new int[]{1,2,3,4,5};
+        Arrays.stream(arr).map(x -> x+5).forEach(System.out::println);
+
+        LocalDate d = LocalDate.now(ZoneId.of("GMT"));
+        System.out.println(d);
+
+        //System.out.println(ZoneRulesProvider.getAvailableZoneIds());
+        LocalTime t = LocalTime.now(ZoneId.of("Asia/Calcutta"));
+        System.out.println(t);
+
+        System.out.println("=========Input list=========");
+        List<Integer> input = new ArrayList<>();
+        rand.ints(10,0,100)
+                .forEach(x -> {
+            input.add(x);
+            System.out.println(x);
+        });
+
+        int sum = input.stream().reduce(0,(x,y)->x+y);
+        System.out.println("Sum : "+sum);
+
+        int s = input.stream().mapToInt(x -> Integer.valueOf(x)).sum();
+        System.out.println("Sum : "+s);
+
+        OptionalDouble dou = Arrays.stream(arr).map(x -> x*x).filter(x -> x > 100).average();
+        System.out.println(dou.orElse(0));
+
+        Optional find = input.stream().findFirst();
+        System.out.println(find.orElse(null));
+
+        System.out.println("========Any========");
+        Optional any = input.stream().findAny();
+        any.ifPresent(x -> System.out.println(x));
+
+        OptionalInt min = IntStream.of(10,2,3,4,5).min();
+        System.out.println("Min is : "+min.getAsInt());
+
+        Optional objMin = Stream.of("Hello","Shru","Dear").min((x,y)-> x.compareTo(y));
+        System.out.println("Min string is "+objMin.get());
+
+        OptionalInt max = Arrays.stream(arr).max();
+        System.out.println("Max is : "+max.getAsInt());
+
+        Optional objMax = Stream.of("Hello","Shru","Dear").min((x,y)-> y.compareTo(x));
+        System.out.println("Max string is "+objMax.get());
+
+        List<Integer> il = Arrays.stream(arr).boxed().collect(Collectors.toList());
+        System.out.println("Array to List "+il);
+
+
+        List<String> sortList = Stream.of("Hello","Shru","Dear").sorted().collect(Collectors.toList());
+        System.out.println(sortList);
+
+        List<String> reverseList = Stream.of("Hello","Shru","Dear").sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        System.out.println(reverseList);
+
+        List<String> lowerCaseNames = Stream.of("Hello","Shru","Dear","Dear")
+                .distinct().map(String::toLowerCase).collect(Collectors.toList());
+        System.out.println(lowerCaseNames);
+
+
+        Stream.of("Hello","Shru","Dear","Dear")
+                .filter(x -> x.startsWith("S"))
+                .forEach(x ->System.out.println("S prefix is "+x));
+
+        List<List<String>> names = Arrays.asList(Arrays.asList("Shru","Raman"), Arrays.asList("Bala","Vijayan"));
+        System.out.println(names);
+
+        List<String> streamedList = names.stream().flatMap(x -> x.stream()).collect(Collectors.toList());
+        System.out.println(streamedList);
+
+        Optional val = Stream.of("Hello","Shru").filter(x -> x.startsWith("k")).findAny();
+        System.out.println(val.orElse("No such val found"));
+//        Stream.concat(Stream.of("Hello","Shru"), Stream.of("Dear","Dear")).forEach(x -> {
+//            String.join(" ",x);
+//        });
+
+        Optional<String> op = Optional.of("Hello Shru");
+        op.ifPresent(x -> System.out.println("Op : "+x));
+
+        //Optional<String> op1 = Optional.of(null); //throws NPE at runtime
+        //System.out.println("Op : "+op1.get());
+
+        Optional<String> op2 = Optional.ofNullable(null);
+        System.out.println("Op2 : "+op2.orElse("Nothing is there")); //get() throws no such ele error
+
+    }
+}
